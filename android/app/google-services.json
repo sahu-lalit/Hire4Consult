@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "319914538065",
+    "project_id": "hire4consult-c87f1",
+    "storage_bucket": "hire4consult-c87f1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319914538065:android:a0d9d7372c5e884c387470",
+        "android_client_info": {
+          "package_name": "com.example.Hire4Consult"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJQiZRpdKFUNBvQhCxNRSo3K-tWTgR-9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319914538065:android:ca7ef4e4e7d91f1c387470",
+        "android_client_info": {
+          "package_name": "com.example.hire4consult"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJQiZRpdKFUNBvQhCxNRSo3K-tWTgR-9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
