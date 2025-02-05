@@ -26,7 +26,7 @@ class ConsultIntroController extends GetxController{
   TextEditingController experienceController = TextEditingController();
   TextEditingController addCertificationController = TextEditingController();
   TextEditingController jobTitleLookingForController = TextEditingController();
-  TextEditingController addPayRolePerMonthController = TextEditingController();
+  // TextEditingController addPayRolePerMonthController = TextEditingController();
   TextEditingController addSocialMediaLinkController = TextEditingController();
   TextEditingController resumeLinkController = TextEditingController();
   TextEditingController addSocialMediaPlatformController = TextEditingController();
@@ -49,11 +49,11 @@ class ConsultIntroController extends GetxController{
         "experience": experienceController.text.trim(),
         "addCertification": addCertificationController.text.trim(),
         "jobTitleLookingFor": jobTitleLookingForController.text.trim(),
-        "addPayRolePerMonth": addPayRolePerMonthController.text.trim(),
+        // "addPayRolePerMonth": addPayRolePerMonthController.text.trim(),
         "addSocialMedia": addSocialMediaLinkController.text.trim(),
         "addResume": resumeLink.value ?? "",
         "selectedSocialMediaPlatform": addSocialMediaPlatformController.text.trim(),
-        "profileVerify": "Verify",
+        "profileVerify": "Verifying",
         "userProfileLink": "",
       };
       final FirebaseAuth auth = FirebaseAuth.instance;

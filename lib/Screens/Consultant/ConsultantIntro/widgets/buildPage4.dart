@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hire4consult/HelperWidgets/CustomDropdown.dart';
 import 'package:hire4consult/HelperWidgets/CustomElevatedButton.dart';
+import 'package:hire4consult/HelperWidgets/constant.dart';
 import 'package:hire4consult/HelperWidgets/customMultiSelectDropdown.dart';
 import 'package:hire4consult/HelperWidgets/customText.dart';
 import 'package:hire4consult/HelperWidgets/toastBar.dart';
@@ -31,10 +32,10 @@ Widget buildPage4(dynamic  pageController, BuildContext context) {
                   ),
                 ],
               )),
-          customDropdown(
-              items: ["React.js", "React Native", "Flutter", "Excel", "UI/UX"],
+          customMultiSelectDropdown(
+              items: mapSkillsSelection[controller.departmentController.text] ?? [],
               hintText: "Job Title Looking For",
-              controller: controller.skillsController),
+              controller: controller.skillsController, context: context),
           Padding(
               padding: EdgeInsets.only(left: 16),
               child: Row(
@@ -64,13 +65,7 @@ Widget buildPage4(dynamic  pageController, BuildContext context) {
               )),
           customMultiSelectDropdown(
               context: context,
-              items: [
-                'APAC',
-                'North-America',
-                'EMEA',
-                'GULF',
-                'LATAM',
-              ],
+              items: listRegions,
               controller: controller.regionsInterestedController,
               hintText: 'e.g. APAC'),
           SizedBox(height: 25),

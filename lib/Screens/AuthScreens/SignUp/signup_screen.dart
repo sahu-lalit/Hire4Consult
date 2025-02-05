@@ -107,7 +107,7 @@ class _AuthScreenState extends State<SignupScreen>
                             Colors.transparent), // Track color
                       ),
                       child: SingleChildScrollView(
-                        physics: NeverScrollableScrollPhysics(),
+                        // physics: NeverScrollableScrollPhysics(),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +129,7 @@ class _AuthScreenState extends State<SignupScreen>
                                 fontWeight: FontWeight.w900,
                               ),
                             ),
-                            const SizedBox(height: 60),
+                            SizedBox(height: height/18),
                             DefaultTabController(
                               length: 2,
                               initialIndex:
@@ -317,7 +317,7 @@ class _AuthScreenState extends State<SignupScreen>
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   SizedBox(
-                                                    height: 35,
+                                                    height:  height/25,
                                                   ),
                                                   Padding(
                                                       padding: EdgeInsets.only(
@@ -489,7 +489,7 @@ class _AuthScreenState extends State<SignupScreen>
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   SizedBox(
-                                                    height: 35,
+                                                    height:  height/25,
                                                   ),
                                                   Padding(
                                                       padding: EdgeInsets.only(
@@ -662,7 +662,7 @@ class _AuthScreenState extends State<SignupScreen>
                                 },
                               ),
                             ),
-                            const SizedBox(height: 32),
+                            SizedBox(height: height/26),
                           ],
                         ),
                       ),

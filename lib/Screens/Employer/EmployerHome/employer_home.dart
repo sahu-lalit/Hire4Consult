@@ -34,11 +34,15 @@ class _EmployerHomeState extends State<EmployerHome> {
       appBar: customAppBar(
         context: context,
         onPressForMyProfile: () {
-          Get.to(() => EmployerProfile(), transition: Transition.native,  duration: Duration(milliseconds: 1300));
+          Get.to(() => EmployerProfile(),
+              transition: Transition.native,
+              duration: Duration(milliseconds: 1300));
         },
-        onPressForLogout: () async{
+        onPressForLogout: () async {
           await FirebaseAuth.instance.signOut();
-          Get.offAll(() => LoginScreen(), transition: Transition.native, duration: Duration(milliseconds: 1300));
+          Get.offAll(() => LoginScreen(),
+              transition: Transition.native,
+              duration: Duration(milliseconds: 1300));
         },
       ),
       body: Stack(
@@ -52,12 +56,12 @@ class _EmployerHomeState extends State<EmployerHome> {
                 Expanded(
                   child: ScrollbarTheme(
                     data: ScrollbarThemeData(
-                              thumbColor: WidgetStateProperty.all(
-                                  Color(0xFFCE2029)), // Change scrollbar color
-                              trackColor: WidgetStateProperty.all(
-                                  Color(0xff212E50)), // Track color
-                              radius: Radius.circular(8),
-                            ),
+                      thumbColor: WidgetStateProperty.all(
+                          Color(0xFFCE2029)), // Change scrollbar color
+                      trackColor: WidgetStateProperty.all(
+                          Color(0xff212E50)), // Track color
+                      radius: Radius.circular(8),
+                    ),
                     child: ListView(
                       children: [
                         // My Listings header and button
@@ -77,7 +81,8 @@ class _EmployerHomeState extends State<EmployerHome> {
                               customElevatedButton(
                                 onPress: () {
                                   Get.to(() => Createnewlisting(),
-                                      transition: Transition.native,  duration: Duration(milliseconds: 1300));
+                                      transition: Transition.native,
+                                      duration: Duration(milliseconds: 1300));
                                 },
                                 buttonText: '+ Create new listing',
                                 backgroundColor: const Color(0xFFCE2029),
@@ -102,20 +107,20 @@ class _EmployerHomeState extends State<EmployerHome> {
                                 return Center(
                                     child: Text('Error: ${snapshot.error}'));
                               }
-                                              
+
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
                                 return Center(child: loading(100));
                               }
-                                              
+
                               if (!snapshot.hasData ||
                                   snapshot.data!.docs.isEmpty) {
                                 return Center(
-                                  child:
-                                      Text('You have not created any jobs yet!'),
+                                  child: Text(
+                                      'You have not created any jobs yet!'),
                                 );
                               }
-                                              
+
                               return ListView.builder(
                                 shrinkWrap: true,
                                 padding: const EdgeInsets.all(16),
@@ -125,13 +130,15 @@ class _EmployerHomeState extends State<EmployerHome> {
                                       .data() as Map<String, dynamic>;
                                   final docRef =
                                       snapshot.data!.docs[index].reference;
-                                              
+
                                   return JobCard(
                                     docReference: docRef,
                                     jobData: jobData,
                                     title: jobData['position'] ?? '',
-                                    company: jobData['company_name_alias'] ?? '',
-                                    location: jobData['regions_interested'] ?? '',
+                                    company:
+                                        jobData['company_name_alias'] ?? '',
+                                    location:
+                                        jobData['regions_interested'] ?? '',
                                     qualifications:
                                         jobData['job_description'] ?? '',
                                   );
@@ -156,8 +163,8 @@ class _EmployerHomeState extends State<EmployerHome> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: controller.verifyButtonText.value == "Verifying"
-                            ? Color(0xfff8f8f8)
-                            : Color(0xffe1e1e1),
+                            ? Color.fromARGB(255, 247, 249, 225)
+                            : Color.fromARGB(255, 250, 222, 222),
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(16),
                           bottomRight: Radius.circular(16),
@@ -171,42 +178,48 @@ class _EmployerHomeState extends State<EmployerHome> {
                         ],
                       ),
                       padding: EdgeInsets.symmetric(
-                          vertical: 15.0, horizontal: 16.0),
+                          vertical: 18.0, horizontal: 16.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          controller.verifyButtonText.value == "Verifying"
+                              ? Icon(Icons.schedule, color: Colors.black87)
+                              : Icon(Icons.cancel, color: Colors.redAccent,),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Text(
                             controller.verifyButtonText.value == "Verifying"
-                                ? "We'll shortly verify your profile."
-                                : "Please verify your profile.",
+                                ? "Your profile is currently under verification. We will verify it shortly."
+                                : "Your profile verification has failed. Please update your profile details.",
                             style: TextStyle(
                               color: Colors.black87,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed:
-                                controller.verifyButtonText.value == "Verify"
-                                    ? controller.updateProfileVerification
-                                    : null, // Disable button while verifying
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 8.0, horizontal: 16.0),
-                            ),
-                            child: Text(
-                              controller.verifyButtonText.value,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                          // ElevatedButton(
+                          //   onPressed:
+                          //       controller.verifyButtonText.value == "Verify"
+                          //           ? controller.updateProfileVerification
+                          //           : null, // Disable button while verifying
+                          //   style: ElevatedButton.styleFrom(
+                          //     backgroundColor: Colors.white,
+                          //     foregroundColor: Colors.black,
+                          //     shape: RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.circular(8.0),
+                          //     ),
+                          //     padding: EdgeInsets.symmetric(
+                          //         vertical: 8.0, horizontal: 16.0),
+                          //   ),
+                          //   child: Text(
+                          //     controller.verifyButtonText.value,
+                          //     style: TextStyle(
+                          //       fontSize: 14,
+                          //       fontWeight: FontWeight.bold,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

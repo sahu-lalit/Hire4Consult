@@ -77,7 +77,7 @@ class EmployerProfileController extends GetxController {
           'companyWebsite': companyWebsiteController.text,
           'companyGst': companyGstController.text,
           'companyPan': companyPanController.text,
-          "profileVerify": userProfileVerified,
+          "profileVerify": "Verify",
         });
         customToastBar(
             title: 'Success!',

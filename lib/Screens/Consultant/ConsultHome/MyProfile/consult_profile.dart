@@ -311,11 +311,11 @@ class _MyProfileState extends State<ConsultProfile> {
                                             .userData?['jobTitleLookingFor'],
                                         controller
                                             .jobTitleLookingForController),
-                                    _buildDetailsSection(
-                                        'Pay role per month',
-                                        '₹${controller.userData?['addPayRolePerMonth'] ?? 'Not Provided'}',
-                                        controller
-                                            .addPayRolePerMonthController),
+                                    // _buildDetailsSection(
+                                    //     'Pay role per month',
+                                    //     '₹${controller.userData?['addPayRolePerMonth'] ?? 'Not Provided'}',
+                                    //     controller
+                                    //         .addPayRolePerMonthController),
 
                                     divider(),
                                     const SizedBox(height: 10),
@@ -602,8 +602,7 @@ class _MyProfileState extends State<ConsultProfile> {
       controller.isLoadingSave.value = false;
       return;
     }
-    if (controller.addPayRolePerMonthController.text.isEmpty ||
-        controller.departmentController.text.isEmpty ||
+    if (controller.departmentController.text.isEmpty ||
         controller.jobTitleLookingForController.text.isEmpty) {
       customToastBar(
           title: "Error",

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hire4consult/HelperWidgets/toastBar.dart';
+import 'package:hire4consult/HelperWidgets/constant.dart';
 
 class ConsultHomeController extends GetxController {
   RxBool showPopup = true.obs;
@@ -43,6 +44,7 @@ class ConsultHomeController extends GetxController {
           final data = snapshot.data();
           final profileVerify = data?['profileVerify'];
           if (profileVerify == 'Verified') {
+            verifyButtonText.value = 'Verified';
             showPopup.value = false;
           } else if (profileVerify == 'Verifying') {
             verifyButtonText.value = 'Verifying';
@@ -56,22 +58,26 @@ class ConsultHomeController extends GetxController {
 
   final selectedSkills = <String>{}.obs;
   final selectedDepartments = <String>{}.obs;
-  // final selectedTimzones = <String>{}.obs;
+
+   final availableSkills = <String>[].obs;
+
+  void updateSkills() {
+    final selectedDeptSkills = selectedDepartments
+        .expand((dept) => mapSkillsSelection[dept] ?? [])
+        .toSet()
+        .toList();
+    availableSkills.assignAll(selectedDeptSkills.cast<String>());
+  }
 
   Stream<QuerySnapshot> get jobsStream {
     Query query = FirebaseFirestore.instance.collection('jobs_information');
     
-    if (selectedSkills.isNotEmpty) {
-      query = query.where('key_skills', whereIn: selectedSkills.toList());
-    }
     if (selectedDepartments.isNotEmpty) {
       query = query.where('department', whereIn: selectedDepartments.toList());
     }
-
-    // if(selectedTimzones.isNotEmpty) {
-    //   query = query.where('time_zone', whereIn: selectedTimzones.toList()); 
-    // }
-    
+    if (selectedSkills.isNotEmpty) {
+      query = query.where('key_skills', whereIn: selectedSkills.toList());
+    }
     return query.snapshots();
   }
 }

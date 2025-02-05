@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hire4consult/HelperWidgets/constant.dart';
 import 'package:hire4consult/HelperWidgets/customAppBar.dart';
 
 import 'package:hire4consult/HelperWidgets/customOutlineButton.dart';
@@ -85,7 +86,7 @@ class _ConsultHomeState extends State<ConsultHome> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'jobs matched',
+                                      'Filter Jobs',
                                       style:
                                           TextStyle(color: Color(0xFF212E50)),
                                     ),
@@ -93,7 +94,8 @@ class _ConsultHomeState extends State<ConsultHome> {
                                       onPressed: () {
                                         Get.find<ConsultHomeController>()
                                           ..selectedSkills.clear()
-                                          ..selectedDepartments.clear();
+                                          ..selectedDepartments.clear()
+                                          ..availableSkills.clear();
                                       },
                                       child: const Text(
                                         'Clear filters',
@@ -108,172 +110,46 @@ class _ConsultHomeState extends State<ConsultHome> {
                                 _buildFilterSection(
                                   'Departments',
                                   [
-                                    _buildCheckboxListTile(
-                                        'Software Development'),
-                                    _buildCheckboxListTile('HR'),
-                                    _buildCheckboxListTile(
-                                        'Business Development'),
-                                    _buildCheckboxListTile('Marketing'),
-                                    _buildCheckboxListTile('Sales'),
-                                    _buildCheckboxListTile('Customer Support'),
-                                    _buildCheckboxListTile('Finance'),
-                                    _buildCheckboxListTile(
-                                        'Product Management'),
-                                    _buildCheckboxListTile('UI/UX Design'),
-                                    _buildCheckboxListTile(
-                                        'Quality Assurance (QA) & Testing'),
-                                    _buildCheckboxListTile(
-                                        'IT Support & Infrastructure'),
-                                    _buildCheckboxListTile('Cybersecurity'),
-                                    _buildCheckboxListTile(
-                                        'Data Science & Analytics'),
-                                    _buildCheckboxListTile('Cloud Computing'),
-                                    _buildCheckboxListTile(
-                                        'Operations & Administration'),
-                                    _buildCheckboxListTile(
-                                        'Legal & Compliance'),
-                                    _buildCheckboxListTile(
-                                        'Procurement & Supply Chain'),
-                                    _buildCheckboxListTile(
-                                        'Research & Development (R&D)'),
-                                    _buildCheckboxListTile(
-                                        'Production & Manufacturing'),
-                                    _buildCheckboxListTile('Quality Control'),
-                                    _buildCheckboxListTile(
-                                        'Maintenance & Engineering'),
-                                    _buildCheckboxListTile(
-                                        'Logistics & Warehouse'),
+                                    SizedBox(
+                                      height: height / 2,
+                                      child: ListView.builder(
+                                        itemCount: listDepartments.length,
+                                        itemBuilder: (context, index) {
+                                          return _buildCheckboxListTile(
+                                              listDepartments[index],
+                                              isDepartment: true);
+                                        },
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                const Divider(
-                                  color: Color(0xff212E50),
-                                ),
+                                const Divider(color: Color(0xff212E50)),
                                 _buildFilterSection(
                                   'Skills',
                                   [
-                                    _buildCheckboxListTile('React.js'),
-                                    _buildCheckboxListTile('React Native'),
-                                    _buildCheckboxListTile('Flutter'),
-                                    _buildCheckboxListTile('Excel'),
-                                    _buildCheckboxListTile('UI/UX'),
-                                    _buildCheckboxListTile('JavaScript'),
-                                    _buildCheckboxListTile('TypeScript'),
-                                    _buildCheckboxListTile('Redux'),
-                                    _buildCheckboxListTile('Context API'),
-                                    _buildCheckboxListTile('Hooks'),
-                                    _buildCheckboxListTile('RESTful APIs'),
-                                    _buildCheckboxListTile('GraphQL'),
-                                    _buildCheckboxListTile('Firebase'),
-                                    _buildCheckboxListTile('Supabase'),
-                                    _buildCheckboxListTile('CI/CD'),
-                                    _buildCheckboxListTile('Jest'),
-                                    _buildCheckboxListTile('Mocha'),
-                                    _buildCheckboxListTile('Flutter Test'),
-                                    _buildCheckboxListTile('Figma'),
-                                    _buildCheckboxListTile('Adobe XD'),
-                                    _buildCheckboxListTile('Sketch'),
-                                    _buildCheckboxListTile('Wireframing'),
-                                    _buildCheckboxListTile('Prototyping'),
-                                    _buildCheckboxListTile('Material Design'),
-                                    _buildCheckboxListTile(
-                                        'Cupertino Guidelines'),
-                                    _buildCheckboxListTile('Accessibility'),
-                                    _buildCheckboxListTile('Usability Testing'),
-                                    _buildCheckboxListTile('Design Thinking'),
-                                    _buildCheckboxListTile('Pivot Tables'),
-                                    _buildCheckboxListTile('VBA'),
-                                    _buildCheckboxListTile('CRM Tools'),
-                                    _buildCheckboxListTile('Salesforce'),
-                                    _buildCheckboxListTile('HubSpot'),
-                                    _buildCheckboxListTile(
-                                        'Data Visualization'),
-                                    _buildCheckboxListTile('Power BI'),
-                                    _buildCheckboxListTile('Tableau'),
-                                    _buildCheckboxListTile('Lead Generation'),
-                                    _buildCheckboxListTile('Market Research'),
-                                    _buildCheckboxListTile('SEO'),
-                                    _buildCheckboxListTile('SEM'),
-                                    _buildCheckboxListTile('Google Analytics'),
-                                    _buildCheckboxListTile(
-                                        'Social Media Marketing'),
-                                    _buildCheckboxListTile('Email Marketing'),
-                                    _buildCheckboxListTile('Content Strategy'),
-                                    _buildCheckboxListTile('Copywriting'),
-                                    _buildCheckboxListTile(
-                                        'Customer Data Management'),
-                                    _buildCheckboxListTile(
-                                        'CRM & Ticketing Systems'),
-                                    _buildCheckboxListTile('Zendesk'),
-                                    _buildCheckboxListTile('Freshdesk'),
-                                    _buildCheckboxListTile('Troubleshooting'),
-                                    _buildCheckboxListTile(
-                                        'Financial Modeling'),
-                                    _buildCheckboxListTile('Budgeting'),
-                                    _buildCheckboxListTile(
-                                        'Accounting Software'),
-                                    _buildCheckboxListTile('QuickBooks'),
-                                    _buildCheckboxListTile('SAP'),
-                                    _buildCheckboxListTile('Data Analysis'),
-                                    _buildCheckboxListTile('Forecasting'),
-                                    _buildCheckboxListTile('Agile'),
-                                    _buildCheckboxListTile('Scrum'),
-                                    _buildCheckboxListTile('A/B Testing'),
-                                    _buildCheckboxListTile('Jira'),
-                                    _buildCheckboxListTile('Trello'),
+                                    Obx(() => controller
+                                            .availableSkills.isNotEmpty
+                                        ? SizedBox(
+                                            height: height / 2,
+                                            child: ListView.builder(
+                                              itemCount: controller
+                                                  .availableSkills.length,
+                                              itemBuilder: (context, index) {
+                                                return _buildCheckboxListTile(
+                                                    controller.availableSkills[
+                                                        index]);
+                                              },
+                                            ),
+                                          )
+                                        : const Center(
+                                            child: Text(
+                                                'First select any department'),
+                                          )),
                                   ],
                                 ),
                                 const Divider(
                                   color: Color(0xff212E50),
                                 ),
-                                // _buildFilterSection(
-                                //   'Time Zones',
-                                //   [
-                                //     _buildCheckboxListTile(
-                                //         'Pacific Time (PT) UTC -8 / UTC -7'),
-                                //     _buildCheckboxListTile(
-                                //         'Mountain Time (MT) UTC -7 / UTC -6'),
-                                //     _buildCheckboxListTile(
-                                //         'Central Time (CT) UTC -6 / UTC -5'),
-                                //     _buildCheckboxListTile(
-                                //         'Eastern Time (ET) UTC -5 / UTC -4'),
-                                //     _buildCheckboxListTile(
-                                //         'Brasilia Time (BRT) UTC -3'),
-                                //     _buildCheckboxListTile(
-                                //         'Argentina Time (ART) UTC -3'),
-                                //     _buildCheckboxListTile(
-                                //         'Colombia Time (COT) UTC -5'),
-                                //     _buildCheckboxListTile(
-                                //         'Greenwich Mean Time (GMT) UTC 0'),
-                                //     _buildCheckboxListTile(
-                                //         'Central European Time (CET) UTC +1 / UTC +2'),
-                                //     _buildCheckboxListTile(
-                                //         'Eastern European Time (EET) UTC +2 / UTC +3'),
-                                //     _buildCheckboxListTile(
-                                //         'West Africa Time (WAT) UTC +1'),
-                                //     _buildCheckboxListTile(
-                                //         'Central Africa Time (CAT) UTC +2'),
-                                //     _buildCheckboxListTile(
-                                //         'East Africa Time (EAT) UTC +3'),
-                                //     _buildCheckboxListTile(
-                                //         'India Standard Time (IST) UTC +5:30'),
-                                //     _buildCheckboxListTile(
-                                //         'China Standard Time (CST) UTC +8'),
-                                //     _buildCheckboxListTile(
-                                //         'Japan Standard Time (JST) UTC +9'),
-                                //     _buildCheckboxListTile(
-                                //         'Singapore Time (SGT) UTC +8'),
-                                //     _buildCheckboxListTile(
-                                //         'Gulf Standard Time (GST) UTC +4'),
-                                //     _buildCheckboxListTile(
-                                //         'Arabian Standard Time (AST) UTC +3'),
-                                //     _buildCheckboxListTile(
-                                //         'Australian Western Standard Time (AWST) UTC +8'),
-                                //     _buildCheckboxListTile(
-                                //         'Australian Eastern Standard Time (AEST) UTC +10 / UTC +11'),
-                                //     _buildCheckboxListTile(
-                                //         'New Zealand Standard Time (NZST) UTC +12 / UTC +13'),
-                                //   ],
-                                // ),
                               ],
                             ),
                           ),
@@ -305,17 +181,16 @@ class _ConsultHomeState extends State<ConsultHome> {
                             return Center(
                                 child: Text('Error: ${snapshot.error}'));
                           }
-
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Center(child: loading(100));
-                          }
-
                           if (!snapshot.hasData ||
                               snapshot.data!.docs.isEmpty) {
                             return Center(
                               child: Text('No jobs found'),
                             );
+                          }
+
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(child: loading(100));
                           }
 
                           return ListView.builder(
@@ -352,8 +227,8 @@ class _ConsultHomeState extends State<ConsultHome> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: controller.verifyButtonText.value == "Verifying"
-                            ? Color(0xfff8f8f8)
-                            : Color(0xffe1e1e1),
+                            ? Color.fromARGB(255, 247, 249, 225)
+                            : Color.fromARGB(255, 250, 222, 222),
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(16),
                           bottomRight: Radius.circular(16),
@@ -369,40 +244,47 @@ class _ConsultHomeState extends State<ConsultHome> {
                       padding: EdgeInsets.symmetric(
                           vertical: 15.0, horizontal: 16.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          controller.verifyButtonText.value == "Verifying"
+                              ? Icon(Icons.schedule, color: Colors.black87)
+                              : Icon(
+                                  Icons.cancel,
+                                  color: Colors.redAccent,
+                                ),
+                          SizedBox(width: 10),
                           Text(
                             controller.verifyButtonText.value == "Verifying"
-                                ? "We'll shortly verify your profile."
-                                : "Please verify your profile.",
+                                ? "Your profile is currently under verification. We will verify it shortly."
+                                : "Your profile verification has failed. Please update your profile details.",
                             style: TextStyle(
                               color: Colors.black87,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed:
-                                controller.verifyButtonText.value == "Verify"
-                                    ? controller.updateProfileVerification
-                                    : null, // Disable button while verifying
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 8.0, horizontal: 16.0),
-                            ),
-                            child: Text(
-                              controller.verifyButtonText.value,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                          // ElevatedButton(
+                          //   onPressed:
+                          //       controller.verifyButtonText.value == "Verify"
+                          //           ? controller.updateProfileVerification
+                          //           : null, // Disable button while verifying
+                          //   style: ElevatedButton.styleFrom(
+                          //     backgroundColor: Colors.white,
+                          //     foregroundColor: Colors.black,
+                          //     shape: RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.circular(8.0),
+                          //     ),
+                          //     padding: EdgeInsets.symmetric(
+                          //         vertical: 8.0, horizontal: 16.0),
+                          //   ),
+                          //   child: Text(
+                          //     controller.verifyButtonText.value,
+                          //     style: TextStyle(
+                          //       fontSize: 14,
+                          //       fontWeight: FontWeight.bold,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -414,23 +296,25 @@ class _ConsultHomeState extends State<ConsultHome> {
     );
   }
 
-  Widget _buildCheckboxListTile(String value, {bool isCompany = false}) {
+  Widget _buildCheckboxListTile(String value, {bool isDepartment = false}) {
+    final controller = Get.find<ConsultHomeController>();
     return Obx(() {
-      final controller = Get.find<ConsultHomeController>();
-      final Set<String> selectedSet = isCompany
+      final Set<String> selectedSet = isDepartment
           ? controller.selectedDepartments
           : controller.selectedSkills;
 
       return ListTile(
         leading: Checkbox(
-          checkColor: Color(0xFFCE2029),
+          checkColor: const Color(0xFFCE2029),
           activeColor: Colors.transparent,
           value: selectedSet.contains(value),
           onChanged: (bool? checked) {
             if (checked == true) {
               selectedSet.add(value);
+              if (isDepartment) controller.updateSkills();
             } else {
               selectedSet.remove(value);
+              if (isDepartment) controller.updateSkills();
             }
           },
         ),
@@ -445,21 +329,23 @@ class _ConsultHomeState extends State<ConsultHome> {
           } else {
             selectedSet.add(value);
           }
+          if (isDepartment) controller.updateSkills();
         },
       );
     });
   }
 
-  Widget _buildFilterSection(String title, children) {
+  Widget _buildFilterSection(String title, List<Widget> children) {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         title: Text(
           title,
-          style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF212E50)),
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF212E50),
+          ),
         ),
         children: children,
       ),

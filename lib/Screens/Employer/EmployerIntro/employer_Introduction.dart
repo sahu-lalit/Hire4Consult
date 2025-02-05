@@ -41,8 +41,7 @@ class _EmployerIntroductionState extends State<EmployerIntroduction> {
             () => Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(imageArray[controller
-                      .imageIndex.value]), 
+                  image: AssetImage(imageArray[controller.imageIndex.value]),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -131,7 +130,7 @@ class _EmployerIntroductionState extends State<EmployerIntroduction> {
     if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
       return 'Phone number must contain only digits';
     }
-    return null; 
+    return null;
   }
 
   String? validateUrl(String? value) {
@@ -190,11 +189,9 @@ class _EmployerIntroductionState extends State<EmployerIntroduction> {
 // }
 
   bool validatePanCard(String panCard) {
-  
-  final panCardRegex = RegExp(r'^[A-Z]{5}[0-9]{4}[A-Z]$');
-  return panCardRegex.hasMatch(panCard);
-}
-
+    final panCardRegex = RegExp(r'^[A-Z]{5}[0-9]{4}[A-Z]$');
+    return panCardRegex.hasMatch(panCard);
+  }
 
   Widget _buildPage1() {
     return _buildContainer(
@@ -334,8 +331,12 @@ class _EmployerIntroductionState extends State<EmployerIntroduction> {
                 ],
               )),
           customTextField(
-              hintText: "Company Phone Number",
-              controller: controller.companyPhoneController),
+            hintText: "Company Phone Number",
+            controller: controller.companyPhoneController,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+            ],
+          ),
           SizedBox(height: 25),
           Center(
               child: customElevatedButton(
@@ -409,10 +410,10 @@ class _EmployerIntroductionState extends State<EmployerIntroduction> {
               child: Row(
                 children: [
                   Text('Company PAN'),
-                  Text(
-                    '*',
-                    style: TextStyle(color: Colors.red),
-                  ),
+                  // Text(
+                  //   '*',
+                  //   style: TextStyle(color: Colors.red),
+                  // ),
                 ],
               )),
           _buildUploadButton(),
@@ -421,10 +422,10 @@ class _EmployerIntroductionState extends State<EmployerIntroduction> {
               child: Row(
                 children: [
                   Text('Company GST Number'),
-                  Text(
-                    '*',
-                    style: TextStyle(color: Colors.red),
-                  ),
+                  // Text(
+                  //   '*',
+                  //   style: TextStyle(color: Colors.red),
+                  // ),
                 ],
               )),
           customTextField(
@@ -433,51 +434,52 @@ class _EmployerIntroductionState extends State<EmployerIntroduction> {
           SizedBox(height: 25),
           Center(
             child: Obx(
-              () => controller.isLoadingSubmitButton.value ? loading(100) : customElevatedButton(
-                  onPress: () async {
-                    controller.isLoadingSubmitButton.value = true;
-                    final companyWebsite =
-                        controller.companyWebsiteController.text;
-                            
-                    final companyPan = controller.companyPanController.text;
-                            
-                    final companyGst = controller.companyGstController.text;
-                            
-                    if (companyWebsite.isEmpty ||
-                        companyPan.isEmpty ||
-                        companyGst.isEmpty) {
-                      customToastBar(
-                          title: "Error",
-                          description: "Please fill all the required fields.",
-                          icon: Icon(Icons.error, color: Colors.yellow));
-                      controller.isLoadingSubmitButton.value = false;
-                            
-                      return;
-                    }
-                            
-                    if (validateUrl(companyWebsite) != null) {
-                      customToastBar(
-                          title: "Error",
-                          description:
-                              "Please enter a valid company website URL.",
-                          icon: Icon(Icons.error, color: Colors.yellow));
-                      controller.isLoadingSubmitButton.value = false;
-                      return;
-                    }
-                            
-                    if (!validateGst(companyGst)) {
-                      customToastBar(
-                          title: "Error",
-                          description: "Please enter a valid GST number.",
-                          icon: Icon(Icons.error, color: Colors.yellow));
-                      controller.isLoadingSubmitButton.value = false;
-                            
-                      return;
-                    }
-                    await controller.saveEmployerUserProfile();
-                  },
-                  buttonText: 'Submit',
-                  backgroundColor: Color(0xff212E50)),
+              () => controller.isLoadingSubmitButton.value
+                  ? loading(100)
+                  : customElevatedButton(
+                      onPress: () async {
+                        controller.isLoadingSubmitButton.value = true;
+                        final companyWebsite =
+                            controller.companyWebsiteController.text;
+
+                        final companyPan = controller.companyPanController.text;
+
+                        final companyGst = controller.companyGstController.text;
+
+                        if (companyWebsite.isEmpty ) {
+                          customToastBar(
+                              title: "Error",
+                              description:
+                                  "Please fill all the required fields.",
+                              icon: Icon(Icons.error, color: Colors.yellow));
+                          controller.isLoadingSubmitButton.value = false;
+
+                          return;
+                        }
+
+                        if (companyWebsite.isNotEmpty && validateUrl(companyWebsite) != null) {
+                          customToastBar(
+                              title: "Error",
+                              description:
+                                  "Please enter a valid company website URL.",
+                              icon: Icon(Icons.error, color: Colors.yellow));
+                          controller.isLoadingSubmitButton.value = false;
+                          return;
+                        }
+
+                        if (companyGst.isNotEmpty && !validateGst(companyGst)) {
+                          customToastBar(
+                              title: "Error",
+                              description: "Please enter a valid GST number.",
+                              icon: Icon(Icons.error, color: Colors.yellow));
+                          controller.isLoadingSubmitButton.value = false;
+
+                          return;
+                        }
+                        await controller.saveEmployerUserProfile();
+                      },
+                      buttonText: 'Submit',
+                      backgroundColor: Color(0xff212E50)),
             ),
           ),
           SizedBox(height: 10),
@@ -654,24 +656,24 @@ class _EmployerIntroductionState extends State<EmployerIntroduction> {
                       },
                       child: Obx(
                         () => controller.isPanUploaded.value
-                              ? loading(100)
-                              : Container(
-                          width: 250,
-                          height: 100,
-                         
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: Color(0xFF212E50),
-                              width: 1,
-                            ),
-                          ),
-                          child: Center(
-                            child: Row(
+                            ? loading(100)
+                            : Container(
+                                width: 250,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    color: Color(0xFF212E50),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(Icons.upload_file, color: Colors.red),
+                                      Icon(Icons.upload_file,
+                                          color: Colors.red),
                                       SizedBox(width: 10),
                                       Text(
                                         'Upload PAN Card',
@@ -682,8 +684,8 @@ class _EmployerIntroductionState extends State<EmployerIntroduction> {
                                       ),
                                     ],
                                   ),
-                          ),
-                        ),
+                                ),
+                              ),
                       ),
                     ),
                   ],
@@ -708,16 +710,17 @@ class _EmployerIntroductionState extends State<EmployerIntroduction> {
                       return;
                     }
 
-                    if(validatePanCard(panNumberController.text) == false){
-                      customToastBar(title: "Error", description: "Please enter a valid PAN number", icon: Icon(Icons.error, color: Colors.red));
+                    if (validatePanCard(panNumberController.text) == false) {
+                      customToastBar(
+                          title: "Error",
+                          description: "Please enter a valid PAN number",
+                          icon: Icon(Icons.error, color: Colors.red));
                       return;
                     }
 
                     controller.companyPanController.text =
                         '${panNumberController.text}^$panDownloadUrl';
 
-                    print(
-                        "Hello World ${controller.companyPanController.text}");
 
                     Navigator.pop(context);
                   },

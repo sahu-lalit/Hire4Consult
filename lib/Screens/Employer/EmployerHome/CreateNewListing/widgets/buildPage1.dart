@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hire4consult/HelperWidgets/CustomElevatedButton.dart';
 import 'package:hire4consult/HelperWidgets/CustomTextField.dart';
+import 'package:hire4consult/HelperWidgets/constant.dart';
 import 'package:hire4consult/HelperWidgets/customMultiSelectDropdown.dart';
 import 'package:hire4consult/HelperWidgets/customText.dart';
 import 'package:hire4consult/HelperWidgets/toastBar.dart';
@@ -44,13 +45,7 @@ Widget buildPage1(dynamic pageController, BuildContext context) {
             )),
         customMultiSelectDropdown(
             context: context,
-            items: [
-              'EMEA',
-              'GULF'
-                  'NA',
-              'LATAM',
-              'APAC',
-            ],
+            items: listRegions,
             controller: controller.regionsInterestedController),
         SizedBox(height: 25),
         Center(

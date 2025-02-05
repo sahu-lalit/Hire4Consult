@@ -59,8 +59,7 @@ Widget buildPage2(dynamic pageController, BuildContext context) {
         Center(
             child: customElevatedButton(
                 onPress: () {
-                  if (controller.addCertificationController.text.isEmpty ||
-                      controller.addEducationController.text.isEmpty) {
+                  if (controller.addEducationController.text.isEmpty) {
                     customToastBar(
                         title: "Error",
                         description: "Please fill all the required fields.",
@@ -709,16 +708,7 @@ Future<void> addEducationOnPressButton(BuildContext context) async {
                   'endDate': endDateController.text,
                   'supportingDocumentLink': supportingDocumentLink,
                 });
-                // setState(() {
-                //   controller.educationList.add({
-                //     'school': schoolController.text,
-                //     'degree': degreeController.text,
-                //     'fieldOfStudy': fieldOfStudyController.text,
-                //     'startDate': startDateController.text,
-                //     'endDate': endDateController.text,
-                //     'supportingDocumentLink': supportingDocumentLink,
-                // });
-                // });
+
                 schoolController.clear();
                 degreeController.clear();
                 fieldOfStudyController.clear();
@@ -803,13 +793,6 @@ Future<void> pickSupportingDocumentWeb(
         controller.isSupportingDocumentUploaded.value = true;
         uploadSupportingDocumentToFirebase((downloadUrl) {
           onLinkUpdated(downloadUrl); // Pass the URL to the callback
-          // setState(() {
-          //   pdfBytesForSupportingDocument =
-          //       reader.result as Uint8List; // Store the file bytes
-          //   controller.isSupportingDocumentUploaded.value = true;
-          //   uploadSupportingDocumentToFirebase((downloadUrl) {
-          //     onLinkUpdated(downloadUrl); // Pass the URL to the callback
-          //   });
         });
       });
     }

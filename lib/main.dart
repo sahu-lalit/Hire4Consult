@@ -12,7 +12,9 @@ import 'package:hire4consult/Screens/Employer/EmployerHome/employer_home.dart';
 import 'package:hire4consult/firebase_options.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:toastification/toastification.dart';
+import 'package:universal_html/html.dart' as html;
 // Replace with your actual home screen
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

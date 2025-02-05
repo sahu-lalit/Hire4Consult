@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hire4consult/HelperWidgets/CustomDropdown.dart';
 import 'package:hire4consult/HelperWidgets/CustomElevatedButton.dart';
 import 'package:hire4consult/HelperWidgets/CustomTextField.dart';
+import 'package:hire4consult/HelperWidgets/constant.dart';
 import 'package:hire4consult/HelperWidgets/customText.dart';
 import 'package:hire4consult/HelperWidgets/loadingIndicator.dart';
 import 'package:hire4consult/HelperWidgets/toastBar.dart';
@@ -144,10 +145,14 @@ class _ConsultIntroductionState extends State<ConsultIntroduction> {
               child: Row(
                 children: [
                   Text('Select Platform'),
+                  Text(
+                    '*',
+                    style: TextStyle(color: Colors.red),
+                  ),
                 ],
               )),
           customDropdown(
-              items: ["LinkedIn", "Github", "Facebook", "Twitter", "Instagram"],
+              items: listPlatforms,
               hintText: "Select Platform",
               controller: controller.addSocialMediaPlatformController),
           Padding(

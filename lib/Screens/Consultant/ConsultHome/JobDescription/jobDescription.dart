@@ -140,7 +140,7 @@ class _JobdescriptionState extends State<Jobdescription> {
                                                 customToastBar(
                                                     title: 'Error',
                                                     description:
-                                                        'Please verify your account first. If you apply for this, then wait...',
+                                                        'Your profile is not verified yet. You cannot apply for a job now.',
                                                     icon: Icon(Icons.error,
                                                         color: Colors
                                                             .yellowAccent));
@@ -199,6 +199,12 @@ class _JobdescriptionState extends State<Jobdescription> {
                           _headingSection(text: 'Department'),
                           SizedBox(height: 5),
                           Text(widget.jobData['department'] ?? ''),
+                          const SizedBox(height: 10),
+                          const Divider(thickness: 1),
+                          const SizedBox(height: 10),
+                          _headingSection(text: 'Region'),
+                          SizedBox(height: 5),
+                          Text(widget.jobData['regions_interested'] ?? ''),
                           const SizedBox(height: 10),
                         ],
                       ),

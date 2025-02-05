@@ -98,8 +98,8 @@ class _ViewApplicantsDetailState extends State<ViewApplicantsDetail> {
 
                           // _buildDetailsSection('Department', widget.applicantData?['department']),
 
-                          _buildDetailsSection('Pay role per month',
-                              '₹${widget.applicantData?['addPayRolePerMonth'] ?? 'Not Provided'}'),
+                          // _buildDetailsSection('Pay role per month',
+                          //     '₹${widget.applicantData?['addPayRolePerMonth'] ?? 'Not Provided'}'),
 
                           // const Divider(thickness: 1),
                           divider(),

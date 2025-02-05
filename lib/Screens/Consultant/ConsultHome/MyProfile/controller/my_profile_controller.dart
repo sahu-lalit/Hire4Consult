@@ -32,7 +32,7 @@ class MyProfileController extends GetxController {
   TextEditingController experienceController = TextEditingController();
   TextEditingController addCertificationController = TextEditingController();
   TextEditingController jobTitleLookingForController = TextEditingController();
-  TextEditingController addPayRolePerMonthController = TextEditingController();
+  // TextEditingController addPayRolePerMonthController = TextEditingController();
   TextEditingController addSocialMediaLinkController = TextEditingController();
   TextEditingController resumeLinkController = TextEditingController();
   TextEditingController addSocialMediaPlatformController = TextEditingController();
@@ -71,7 +71,7 @@ class MyProfileController extends GetxController {
         experienceController.text = userData?['experience'] ?? '';
         departmentController.text = userData?['department'] ?? '';
         jobTitleLookingForController.text = userData?['jobTitleLookingFor'] ?? '';
-        addPayRolePerMonthController.text = userData?['addPayRolePerMonth'] ?? '';
+        // addPayRolePerMonthController.text = userData?['addPayRolePerMonth'] ?? '';
         skillsController.text = userData?['skills'] ?? '';
         timeSlotAvailabilityController.text = userData?['timeSlotAvailability'] ?? '';
         regionsInterestedController.text = userData?['regionsInterested'] ?? '';
@@ -197,10 +197,10 @@ class MyProfileController extends GetxController {
         "experience": experienceController.text.trim(),
         "addCertification": addCertificationController.text.trim(),
         "jobTitleLookingFor": jobTitleLookingForController.text.trim(),
-        "addPayRolePerMonth": addPayRolePerMonthController.text.trim(),
+        // "addPayRolePerMonth": addPayRolePerMonthController.text.trim(),
         "addSocialMedia": addSocialMediaLinkController.text.trim(),
         "selectedSocialMediaPlatform": addSocialMediaPlatformController.text.trim(),
-        "profileVerify": userProfileVerified,
+        "profileVerify": "Verifying",
         "userProfileLink": userProfileLink,
         });
         customToastBar(

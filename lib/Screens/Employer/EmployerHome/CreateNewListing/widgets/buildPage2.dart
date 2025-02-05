@@ -3,8 +3,11 @@ import 'package:get/get.dart';
 import 'package:hire4consult/HelperWidgets/CustomDropdown.dart';
 import 'package:hire4consult/HelperWidgets/CustomElevatedButton.dart';
 import 'package:hire4consult/HelperWidgets/CustomTextField.dart';
+import 'package:hire4consult/HelperWidgets/constant.dart';
+import 'package:hire4consult/HelperWidgets/customSearchableDropdown.dart';
 import 'package:hire4consult/HelperWidgets/customText.dart';
 import 'package:hire4consult/HelperWidgets/toastBar.dart';
+import 'package:hire4consult/HelperWidgets/constant.dart';
 
 import '../create_new_listing_controller/create_new_listing_controller.dart';
 
@@ -29,30 +32,7 @@ Widget buildPage2(dynamic pageController, BuildContext context) {
                 ),
               ],
             )),
-        customDropdown(items: [
-          'Software Development',
-          'HR',
-          'Business Development',
-          'Marketing',
-          'Sales',
-          'Customer Support',
-          'Finance',
-          'Product Management',
-          'UI/UX Design',
-          'Quality Assurance (QA) & Testing',
-          'IT Support & Infrastructure',
-          'Cybersecurity',
-          'Data Science & Analytics',
-          'Cloud Computing',
-          'Operations & Administration',
-          'Legal & Compliance',
-          'Procurement & Supply Chain',
-          'Research & Development (R&D)',
-          'Production & Manufacturing',
-          'Quality Control',
-          'Maintenance & Engineering',
-          'Logistics & Warehouse'
-        ], hintText: "Department", controller: controller.departmentController),
+        CustomSearchableDropdown(items: listDepartments, hintText: "Department", controller: controller.departmentController),
         Padding(
             padding: EdgeInsets.only(left: 16),
             child: Row(
